@@ -31,25 +31,26 @@ srd_ncount <- cartogram_ncont(srd, "Weights",k = 0.8)
 srd_sf<- sf::st_as_sf(srd)
 srd_ncount_sf<- sf::st_as_sf(srd_ncount)
 
-VNplotly<- plot_ly(stroke = I("#bdbdbd"), span = I(1)) %>% 
+VNplotly<- 
+plot_ly(stroke = I("#bdbdbd"), span = I(1),colors = "YlOrRd") %>% 
   add_sf(
     data = srd_sf, 
     color = I("gray95"),name="2020",
     hoverinfo = "none",showlegend =T
   ) %>%
-  add_lines(x=7375992, y=4822605,linetype = I("dash"), line = list(color= '#525252', width=1.5, opacity= 0),showlegend=T, name="2050") %>% 
+  add_lines(x=7375992, y=4822605,linetype = I("dot"), line = list(color= '#525252', width=1, opacity= 0),showlegend=T, name="2050") %>% 
   add_sf(
     span = I(0.5),
-    data = srd_ncount_sf, linetype = I("dash"),
+    data = srd_ncount_sf, linetype = I("dot"),
     color = ~Smanjenje,
+    colors="magma",
+    fillscale="magma",
     split = ~okrug,
     line = list(
-      color= '#525252', width=1.5,
+      color= '#525252', width=1,
       opacity= 1),showlegend =F,
     text = ~paste0("<b>",gsub(okrug,pattern = "ki", replacement = "ka oblast"),"</b>  \nProjektovano smanjenje: <b>", format(Smanjenje, nsmall=1, decimal.mark=","), "%</b>", "\nBr. stanovnika 2020: <b>", format(ST2020, nsmall=1, big.mark=".") ,"</b>\nBr. stanovnika 2050: <b>", format(ST2050, nsmall=1, big.mark="."), "</b>" ), 
     hoverinfo = "text", 
-    hoveron = "fills" ) %>% colorbar(title="Smanjenje\npopulacije(%)", orientation="h") %>% layout(showlegend = T) 
+    hoveron = "fills" ) %>% colorbar(title="Smanjenje\npopulacije(%)", orientation="h",colorscale="magma") %>% layout(showlegend = T) 
+
 VNplotly
-
-#a poligoni za 2050. budu uokvireni isprekidanim linijama, a da legenda ima i tu informaciju - puna linija 2020, isprekidana 2050
-
