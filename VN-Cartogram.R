@@ -1,7 +1,8 @@
 require(plotly)
 require(dplyr)
 require(cartogram)
-require(plotly)
+require(rgdal)
+
 VNproj<- read.csv("VN-Proj.csv")
 VNweigths <- read.csv("VN-Weigths.csv")
 
@@ -30,6 +31,8 @@ srd_ncount <- cartogram_ncont(srd, "Weights",k = 0.8)
 
 srd_sf<- sf::st_as_sf(srd)
 srd_ncount_sf<- sf::st_as_sf(srd_ncount)
+load("koMunicipalities")
+kosovosf<- sf::st_as_sf(spTransform(raster::aggregate(koMunicipalities),serb_proj))
 
 VNplotly<- 
 plot_ly(stroke = I("#bdbdbd"), span = I(1),colors = "YlOrRd") %>% 
@@ -51,6 +54,10 @@ plot_ly(stroke = I("#bdbdbd"), span = I(1),colors = "YlOrRd") %>%
       opacity= 1),showlegend =F,
     text = ~paste0("<b>",gsub(okrug,pattern = "ki", replacement = "ka oblast"),"</b>  \nProjektovano smanjenje: <b>", format(Smanjenje, nsmall=1, decimal.mark=","), "%</b>", "\nBr. stanovnika 2020: <b>", format(ST2020, nsmall=1, big.mark=".") ,"</b>\nBr. stanovnika 2050: <b>", format(ST2050, nsmall=1, big.mark="."), "</b>" ), 
     hoverinfo = "text", 
-    hoveron = "fills" ) %>% colorbar(title="Smanjenje\npopulacije(%)", orientation="h",colorscale="magma") %>% layout(showlegend = T) 
+    hoveron = "fills" ) %>% colorbar(title="Smanjenje\npopulacije(%)", orientation="h",colorscale="magma") %>% layout(showlegend = T)  %>% add_sf(
+      span = I(0.5),
+      data = kosovosf)
 
 VNplotly
+
+
