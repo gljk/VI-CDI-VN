@@ -1,0 +1,3 @@
+# Prognoza smanjenja broja stanovnika po administrativnim oblastima Srbije, osnovni scenario, 2020-2050.
+Sadašnji broj stanovnika Srbije najverovatnije će opasti za 21,0% do 2050. godine, ali kartogram ukazuje da je depopulacija, pre svega, regionalno i podregionalno pitanje. Smanjenje će biti izraženije u Regionu Južne i Istočne Srbije (33,4%) odnosno Regionu Šumadije i Zapadne Srbije (28,5%). Najdrastičniji gubitak stanovništva očekuje se u oblastima koje karakteriše tradicionalno iseljavanje ili najveći udeo starih ili oboje. U četiri oblasti na istoku zemlje, pad bi premašio i 40%.
+Vladimir Nikitović
